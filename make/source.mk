@@ -51,20 +51,15 @@ COMMON_SRC = \
             io/serial.c \
             io/statusindicator.c \
             io/transponder_ir.c \
+            io/usb_cdc_hid.c \
+            io/usb_msc.c \
             msp/msp_serial.c \
             scheduler/scheduler.c \
             sensors/adcinternal.c \
             sensors/battery.c \
             sensors/current.c \
             sensors/voltage.c \
-            target/config_helper.c
-
-OSD_SLAVE_SRC = \
-            io/displayport_max7456.c \
-            osd_slave/osd_slave_init.c \
-            io/osd_slave.c
-
-FC_SRC = \
+            target/config_helper.c \
             fc/fc_init.c \
             fc/controlrate_profile.c \
             drivers/camera_control.c \
@@ -140,12 +135,10 @@ FC_SRC = \
             io/displayport_max7456.c \
             io/displayport_msp.c \
             io/displayport_oled.c \
-            io/displayport_rcdevice.c \
             io/displayport_srxl.c \
             io/displayport_crsf.c \
             io/rcdevice_cam.c \
             io/rcdevice.c \
-            io/rcdevice_osd.c \
             io/gps.c \
             io/ledstrip.c \
             io/osd.c \
@@ -176,12 +169,7 @@ COMMON_DEVICE_SRC = \
             $(CMSIS_SRC) \
             $(DEVICE_STDPERIPH_SRC)
 
-ifeq ($(OSD_SLAVE),yes)
-TARGET_FLAGS := -DUSE_OSD_SLAVE $(TARGET_FLAGS)
-COMMON_SRC := $(COMMON_SRC) $(OSD_SLAVE_SRC) $(COMMON_DEVICE_SRC)
-else
-COMMON_SRC := $(COMMON_SRC) $(FC_SRC) $(COMMON_DEVICE_SRC)
-endif
+COMMON_SRC := $(COMMON_SRC) $(COMMON_DEVICE_SRC)
 
 ifeq ($(SIMULATOR_BUILD),yes)
 TARGET_FLAGS := -DSIMULATOR_BUILD $(TARGET_FLAGS)
@@ -297,6 +285,7 @@ SIZE_OPTIMISED_SRC := $(SIZE_OPTIMISED_SRC) \
             io/serial_4way_avrootloader.c \
             io/serial_4way_stk500v2.c \
             io/transponder_ir.c \
+            io/usb_cdc_hid.c \
             msp/msp_serial.c \
             cms/cms.c \
             cms/cms_menu_blackbox.c \
