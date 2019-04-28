@@ -18,7 +18,7 @@
 #pragma once
 
 #define TARGET_BOARD_IDENTIFIER "HESP"
-#define USBD_PRODUCT_STRING     "KELIOSPRING"
+#define USBD_PRODUCT_STRING     "HELIOSPRING"
 #define MSP_OVER_CLI
 
 #define LED0_PIN                PB7
